@@ -34,6 +34,10 @@ class Agencia
     #[ORM\Column]
     private ?int $cep = null;
 
+    #[ORM\ManyToOne(inversedBy: 'agencia')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Banco $banco = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -119,6 +123,18 @@ class Agencia
     public function setCep(int $cep): self
     {
         $this->cep = $cep;
+
+        return $this;
+    }
+
+    public function getBanco(): ?Banco
+    {
+        return $this->banco;
+    }
+
+    public function setBanco(?Banco $banco): self
+    {
+        $this->banco = $banco;
 
         return $this;
     }
