@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello AgenciaController!{% endblock %}
+{% block title %}SB ✅{% endblock %}
 
 {% block body %}
 <style>
@@ -9,12 +9,22 @@
 </style>
 
 <div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+    <div>
+        <h1>Lista de Agencias Bancárias</h1>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/xampp/htdocs/project_especializacao_PHP/src/Controller/AgenciaController.php'|file_link(0) }}">src/Controller/AgenciaController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/xampp/htdocs/project_especializacao_PHP/templates/agencia/index.html.twig'|file_link(0) }}">templates/agencia/index.html.twig</a></code></li>
-    </ul>
+        {% if agencias|length > 0 %}
+            {% for agencia in agencias %}
+                <div>
+                    <a href="{{ path('app_agencia', { agenciaID: agencia.id }) }}">
+                        {{ agencia.nome}}
+                    </a>
+                </div>
+            {% endfor %}
+        {% else %}
+            Não tem nada para mostrar
+        {% endif %}
+    </div>
+
 </div>
+
 {% endblock %}
