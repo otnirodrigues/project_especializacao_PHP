@@ -3,16 +3,17 @@
 namespace App\Controller;
 
 use App\Entity\Agencia;
+use App\Form\AgenciaType;
 use App\Repository\AgenciaRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class AgenciaController extends AbstractController
 {
     #[Route('/agencia', name: 'app_agencia')]
-    public function index(AgenciaRepository $agencias): Response
-    {
+    public function index(AgenciaRepository $agencias): Response{
     
         return $this->render('agencia/index.html.twig', [
             'controller_name' => 'AgenciaController',
@@ -25,6 +26,26 @@ class AgenciaController extends AbstractController
         return $this->render('agencia/show.html.twig', [
             'agencias' => $agenciaID
         ]);
+    }
+
+    #[Route('/agencia/add', name: 'app_agencia_add', priority: 2)]
+    public function add(Request $request, AgenciaRepository $agencia) : Response {
+      
+        $form = $this->createForm(AgenciaType::class, new Agencia());
+
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()){
+            $agencias = $form->getData();
+            $agencias->save($agencia, true);
+            $this->addFlash('success', 'Agencia criada');
+            return $this->redirectToRoute('app_agencia');
+       }
+
+    return $this->renderForm(
+        'agencia/add.html.twig',
+        [ 'form' => $form ]
+    );
+       
     }
 
 }
