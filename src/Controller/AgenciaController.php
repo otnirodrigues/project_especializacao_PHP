@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Agencia;
 use App\Repository\AgenciaRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -18,4 +19,12 @@ class AgenciaController extends AbstractController
             'agencias' => $agencias->findAll()
         ]);
     }
+
+    #[Route('/agencia/{id}', name: 'app_agencia_show')]
+    public function showOne(Agencia $agenciaID): Response{
+        return $this->render('agencia/show.html.twig', [
+            'agencias' => $agenciaID
+        ]);
+    }
+
 }

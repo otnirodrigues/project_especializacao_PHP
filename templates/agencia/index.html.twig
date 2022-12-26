@@ -15,7 +15,7 @@
         {% if agencias|length > 0 %}
             {% for agencia in agencias %}
                 <div>
-                    <a href="{{ path('app_agencia', { agenciaID: agencia.id }) }}">
+                    <a href="{{ path('app_agencia_show', { id: agencia.id }) }}">
                         {{ agencia.nome}}
                     </a>
                 </div>

@@ -10,10 +10,18 @@
 
 <div class="example-wrapper">
     <div>
-        <h1>Bem vindos (as) ao Sitema Bancário! </h1>
+        <h1>Bem vindos(as) ao Sitema Bancário! </h1>
     </div>
     
-    <h4>Aqui ficará as opções de login e de visualizar agências </h4>
+    <div> 
+        <h5>Se você ainda não é cliente conheça nossas agências e abra sua conta!</h5>
+        
+        <a href="{{ path('app_agencia') }}"> Listar Agências Bancárias </a>
+
+        <h5>Se você já é cliente faça login na sua conta!</h5>
+        
+        <a href="{{ path('app_agencia') }}"> Fazer Login em uma Conta</a>
+    </div>
 
 </div>
     

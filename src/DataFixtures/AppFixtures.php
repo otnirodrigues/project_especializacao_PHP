@@ -20,7 +20,7 @@ class AppFixtures extends Fixture
         $manager->persist($Banco);
 
         //criando Agencias no db
-        for ($i = 0; $i < 5; $i++){
+        for ($i = 1; $i < 6; $i++){
             $Agencia = new  Agencia();
             $Agencia->setNome('Agencia' . $i);
             $Agencia->setRua('Rua Projetada');
