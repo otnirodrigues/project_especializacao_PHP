@@ -36,7 +36,7 @@ class AgenciaController extends AbstractController
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()){
             $agencias = $form->getData();
-            $agencias->save($agencia, true);
+            $agencia->save($agencias, true);
             $this->addFlash('success', 'Agencia criada');
             return $this->redirectToRoute('app_agencia');
        }
