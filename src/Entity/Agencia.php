@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\AgenciaRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: AgenciaRepository::class)]
@@ -37,6 +39,17 @@ class Agencia
     #[ORM\ManyToOne(inversedBy: 'agencia')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Banco $banco = null;
+
+    #[ORM\OneToMany(mappedBy: 'agencia', targetEntity: Conta::class)]
+    private Collection $contas;
+
+    #[ORM\OneToOne(cascade: ['persist', 'remove'])]
+    private ?Gerente $gerente = null;
+
+    public function __construct()
+    {
+        $this->contas = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -135,6 +148,48 @@ class Agencia
     public function setBanco(?Banco $banco): self
     {
         $this->banco = $banco;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Conta>
+     */
+    public function getContas(): Collection
+    {
+        return $this->contas;
+    }
+
+    public function addConta(Conta $conta): self
+    {
+        if (!$this->contas->contains($conta)) {
+            $this->contas->add($conta);
+            $conta->setAgencia($this);
+        }
+
+        return $this;
+    }
+
+    public function removeConta(Conta $conta): self
+    {
+        if ($this->contas->removeElement($conta)) {
+            // set the owning side to null (unless already changed)
+            if ($conta->getAgencia() === $this) {
+                $conta->setAgencia(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getGerente(): ?Gerente
+    {
+        return $this->gerente;
+    }
+
+    public function setGerente(?Gerente $gerente): self
+    {
+        $this->gerente = $gerente;
 
         return $this;
     }
