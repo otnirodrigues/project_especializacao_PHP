@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html>
+<html class="">
     <head>
         <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
+        <title>{% block title %}Título padrão!{% endblock %}</title>
         <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
         {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
         {% block stylesheets %}
@@ -12,9 +12,39 @@
         {% block javascripts %}
             {{ encore_entry_script_tags('app') }}
         {% endblock %}
+        <script src="https://cdn.tailwindcss.com"></script>
+        <script>
+            tailwind.config = {
+                darkMode: 'class'
+            }
+        </script>
+
     </head>
-    <body style="background-color:PowderBlue; display: flex; text-align: center;">
-        {% block body %}{% endblock %}
+    <body class="bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-white px-3">
+        <div class="w-full md:w-2/3 mx-auto mb-4 flex justify-between items-center">
+            <div class="text-4xl  bg-indigo-600 hover:bg-indigo-700 dark:bg-indigo-500 dark:hover:bg-indigo-400 text-white rounded-md border p-2 mt-4 mb-2">
+                <a href="{{ path('app_home_page') }}">Home</a>
+                {% block bread %}
+                {% endblock %}
+            </div>
+            <div class="text-right">
+                {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                    <div>
+                        <a href="{{ path('app_logout') }}">Logout</a>
+                    </div>
+                {% else %}
+                    <div class="text-sm text-gray-400 dark:text-gray-500">
+                        <a href="{{ path('app_login') }}">Login</a>
+                    </div>
+                {% endif %}
+                
+            </div>
+        </div>    
+        <div class="w-full md:w-2/3 mx-auto">
+            {% for message in app.flashes('success') %}
+                <div class="rounded-md p-2 border-green-300 bg-green-50 border dark:border-green-600 dark:bg-green-700 dark:text-white mb-4">{{ message }}</div>
+            {% endfor %}
+            {% block body %}{% endblock %}
+        </div>
     </body>
-    
 </html>

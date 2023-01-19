@@ -2,18 +2,30 @@
 
 namespace App\DataFixtures;
 
-use App\Entity\Agencia;
+use App\Entity\User;
 use App\Entity\Banco;
-use Doctrine\Bundle\FixturesBundle\Fixture;
+use App\Entity\Agencia;
 use Doctrine\Persistence\ObjectManager;
+use Doctrine\Bundle\FixturesBundle\Fixture;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class AppFixtures extends Fixture
 {
+    public function __construct(private UserPasswordHasherInterface $hasher)
+    {}
+    
     public function load(ObjectManager $manager): void
     {
+
         // $product = new Product();
         // $manager->persist($product);
         
+        //Criando User
+        $user1 = new User();
+        $user1 -> setEmail('admin@bank.com');
+        $user1 -> setPassword($this->hasher->hashPassword($user1, '505887'));
+        $manager->persist($user1);
+
         //Criando o Banco no db
         $Banco = new Banco();
         $Banco->setNome('Banco Recifense');

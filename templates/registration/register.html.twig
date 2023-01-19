@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {% for flash_error in app.flashes('verify_email_error') %}
+        <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
+    {% endfor %}
+
+    {{ form_start(registrationForm) }}
+        <label class="block text-sm text-gray-700 dark:text-gray-300 font-medium">
+            {{ form_row(registrationForm.nome) }}
+            {{ form_row(registrationForm.email) }}
+            {{ form_row(registrationForm.plainPassword, {
+                label: 'Password'
+            }) }}
+        
+            {{ form_row(registrationForm.agreeTerms) }}
+        </label>
+
+        <button type="submit" class="block w-full shadow-sm border-transparent bg-indigo-600 hover:bg-indigo-700 dark:bg-indigo-500 dark:hover:bg-indigo-400 text-white rounded-md border p-2 mt-4 mb-2">Registrar</button>
+    {{ form_end(registrationForm) }}
+    
+    <div>
+        <a href="{{ path('app_home_page') }}">
+            <button class="block w-full shadow-sm border-transparent bg-indigo-600 hover:bg-indigo-700 dark:bg-indigo-500 dark:hover:bg-indigo-400 text-white rounded-md border p-2 mt-4 mb-2">Cancelar</button>
+        </a>
+    </div>
+{% endblock %}

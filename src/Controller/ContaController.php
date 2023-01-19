@@ -15,4 +15,12 @@ class ContaController extends AbstractController
             'controller_name' => 'ContaController',
         ]);
     }
+
+    #[Route('/depositar', name: 'app_depositar')]
+    public function depositar()
+    {
+        return $this->render('conta/deposito.html.twig', [
+            'controller_name' => 'ContaController',
+        ]);
+    }
 }

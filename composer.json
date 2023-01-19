@@ -15,10 +15,13 @@
         "symfony/flex": "^2",
         "symfony/form": "6.2.*",
         "symfony/framework-bundle": "6.2.*",
+        "symfony/mailer": "6.2.*",
         "symfony/runtime": "6.2.*",
         "symfony/security-bundle": "6.2.*",
         "symfony/twig-bundle": "6.2.*",
+        "symfony/validator": "6.2.*",
         "symfony/yaml": "6.2.*",
+        "symfonycasts/verify-email-bundle": "^1.13",
         "twig/extra-bundle": "^2.12|^3.0",
         "twig/twig": "^2.12|^3.0"
     },

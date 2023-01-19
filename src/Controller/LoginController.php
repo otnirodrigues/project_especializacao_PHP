@@ -15,4 +15,8 @@ class LoginController extends AbstractController
             'controller_name' => 'LoginController',
         ]);
     }
+
+    #[Route('/logout', name: 'app_logout')]
+    public function logout(){}
+    
 }
