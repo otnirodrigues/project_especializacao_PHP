@@ -78,12 +78,10 @@ class ContaController extends AbstractController
                 return $this->redirectToRoute('app_home_page');
             }
         }
-        
 
         return $this->renderForm('conta/deposito.html.twig', 
             [ 'form' => $form ]);
 
-    
     }
 
     #[Route('/sacar', name: 'app_sacar')]
