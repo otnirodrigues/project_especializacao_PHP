@@ -26,6 +26,12 @@ class Transacao
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $data = null;
 
+    #[ORM\ManyToOne(inversedBy: 'transacaos')]
+    private ?Conta $contaDestino = null;
+
+    #[ORM\ManyToOne(inversedBy: 'transacaos')]
+    private ?Conta $contaRemetente = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -75,6 +81,30 @@ class Transacao
     public function setData(\DateTimeInterface $data): self
     {
         $this->data = $data;
+
+        return $this;
+    }
+
+    public function getContaDestino(): ?Conta
+    {
+        return $this->contaDestino;
+    }
+
+    public function setContaDestino(?Conta $contaDestino): self
+    {
+        $this->contaDestino = $contaDestino;
+
+        return $this;
+    }
+
+    public function getContaRemetente(): ?Conta
+    {
+        return $this->contaRemetente;
+    }
+
+    public function setContaRemetente(?Conta $contaRemetente): self
+    {
+        $this->contaRemetente = $contaRemetente;
 
         return $this;
     }

@@ -27,6 +27,11 @@ class RegistrationFormType extends AbstractType
                     ]),
                 ],
             ])
+            ->add('conta', ContaType::class,[
+                'label' => 'Conta',
+                'mapped' => false,
+                'required' => false,
+            ])
             ->add('plainPassword', PasswordType::class, [
                 // instead of being set onto the object directly,
                 // this is read and encoded in the controller

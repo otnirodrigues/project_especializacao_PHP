@@ -1,20 +1,31 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello ContaController!{% endblock %}
+{% block title %}SB ✅{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+
 
 <div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+    <h1>Lista de Contas Bancárias</h1>
+    <div>
+        
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/xampp/htdocs/project_especializacao_PHP/src/Controller/ContaController.php'|file_link(0) }}">src/Controller/ContaController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/xampp/htdocs/project_especializacao_PHP/templates/conta/index.html.twig'|file_link(0) }}">templates/conta/index.html.twig</a></code></li>
-    </ul>
+        {% if contas|length > 0 %}
+            {% for conta in contas %}
+                <div class=" bg-indigo-600 hover:bg-indigo-700 dark:bg-indigo-500 dark:hover:bg-indigo-400 text-white rounded-md border p-2 mt-4 mb-2">
+                    <a href="{{ path('app_agencia_show', { id: conta.id }) }}">
+                        {{ conta.numero}}
+                        {{ conta.user}}
+                        {{ conta.saldo}}
+                        {{ conta.agencia}}
+                    </a>
+                </div>
+            {% endfor %}
+        {% else %}
+            Nenhuma conta cadastrada
+        {% endif %}
+    </div>
+
 </div>
+
 {% endblock %}

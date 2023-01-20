@@ -5,6 +5,7 @@ namespace App\DataFixtures;
 use App\Entity\User;
 use App\Entity\Banco;
 use App\Entity\Agencia;
+use App\Entity\TipoConta;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
@@ -44,6 +45,16 @@ class AppFixtures extends Fixture
             $Agencia->setBanco($Banco);
             $manager->persist($Agencia);
         }
+
+        #criando TipoConta
+
+        $poupanca = new TipoConta();
+        $poupanca -> setTipo('Poupança');
+        $manager->persist($poupanca);
+        
+        $corrente = new TipoConta();
+        $corrente -> setTipo('Corrente');
+        $manager->persist($corrente);
 
         $manager->flush();
     }

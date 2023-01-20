@@ -27,15 +27,22 @@ class Conta
     #[ORM\ManyToOne(inversedBy: 'contas')]
     private ?Agencia $agencia = null;
 
-    #[ORM\OneToMany(mappedBy: 'trasacaoContas', targetEntity: Transacao::class)]
+    #[ORM\OneToMany(mappedBy: 'transacaoContas', targetEntity: Transacao::class)]
     private Collection $trasacoes;
 
     #[ORM\ManyToOne(inversedBy: 'contas')]
     private ?TipoConta $tipoConta = null;
 
+    #[ORM\Column]
+    private ?bool $isActive = null;
+
+    #[ORM\OneToMany(mappedBy: 'contaDestino', targetEntity: Transacao::class)]
+    private Collection $transacaos;
+
     public function __construct()
     {
         $this->trasacoes = new ArrayCollection();
+        $this->transacaos = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -91,6 +98,18 @@ class Conta
         return $this;
     }
 
+    public function getIsActive(): ?string
+    {
+        return $this->isActive;
+    }
+
+    public function setIsActive(string $isActive): self
+    {
+        $this->isActive = $isActive;
+
+        return $this;
+    }
+
     /**
      * @return Collection<int, Transacao>
      */
@@ -131,5 +150,40 @@ class Conta
         $this->tipoConta = $tipoConta;
 
         return $this;
+    }
+
+    /**
+     * @return Collection<int, Transacao>
+     */
+    public function getTransacaos(): Collection
+    {
+        return $this->transacaos;
+    }
+
+    public function addTransacao(Transacao $transacao): self
+    {
+        if (!$this->transacaos->contains($transacao)) {
+            $this->transacaos->add($transacao);
+            $transacao->setContaDestino($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTransacao(Transacao $transacao): self
+    {
+        if ($this->transacaos->removeElement($transacao)) {
+            // set the owning side to null (unless already changed)
+            if ($transacao->getContaDestino() === $this) {
+                $transacao->setContaDestino(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function __toString()
+    {
+        return $this->numero;
     }
 }
