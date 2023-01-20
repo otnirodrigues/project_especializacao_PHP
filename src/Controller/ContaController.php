@@ -61,16 +61,24 @@ class ContaController extends AbstractController
             $valor = $deposito->getValor();
 
             $conta = $contaRepository->findOneBy(['numero' => $contaDestino]);
-         
-            $deposito->setDescricao('Deposito');
-            $deposito->setData(new \DateTime());
-            $conta->setSaldo($conta->getSaldo() + $valor);
-            $entityManager->persist($conta);
-            $entityManager->flush();
-            $this->addFlash('success', 'Deposito realizado com sucesso!');
-            $transacaoRepository->save($deposito, true);
-            return $this->redirectToRoute('app_home_page');
+            
+        
+            if($valor <= 0){
+                $this->addFlash('error', 'Valor de deposito Inválido!');
+                return $this->redirectToRoute('app_home_page');
+
+            }else{
+                $deposito->setDescricao('Deposito');
+                $deposito->setData(new \DateTime());
+                $conta->setSaldo($conta->getSaldo() + $valor);
+                $entityManager->persist($conta);
+                $entityManager->flush();
+                $this->addFlash('success', 'Deposito realizado com sucesso!');
+                $transacaoRepository->save($deposito, true);
+                return $this->redirectToRoute('app_home_page');
+            }
         }
+        
 
         return $this->renderForm('conta/deposito.html.twig', 
             [ 'form' => $form ]);
@@ -92,15 +100,23 @@ class ContaController extends AbstractController
             $valor = $saque->getValor();
 
             $conta = $contaRepository->findOneBy(['numero' => $contaSaque]);
-         
-            $saque->setDescricao('Saque');
-            $saque->setData(new \DateTime());
-            $conta->setSaldo($conta->getSaldo() - $valor);
-            $entityManager->persist($conta);
-            $entityManager->flush();
-            $this->addFlash('success', 'Saque realizado com sucesso!');
-            $transacaoRepository->save($saque, true);
-            return $this->redirectToRoute('app_home_page');
+            if($conta->getSaldo() < $valor){
+                $this->addFlash('error', 'Saldo Insuficiente!');
+                return $this->redirectToRoute('app_home_page');
+            }
+            if($valor <= 0){
+                $this->addFlash('error', 'Digite um valor válido para sacar!');
+                return $this->redirectToRoute('app_home_page');
+            }else{
+                $saque->setDescricao('Saque');
+                $saque->setData(new \DateTime());
+                $conta->setSaldo($conta->getSaldo() - $valor);
+                $entityManager->persist($conta);
+                $entityManager->flush();
+                $this->addFlash('success', 'Saque realizado com sucesso!');
+                $transacaoRepository->save($saque, true);
+                return $this->redirectToRoute('app_home_page');
+            }
         }
 
         return $this->renderForm('conta/saque.html.twig', 
@@ -125,11 +141,19 @@ class ContaController extends AbstractController
 
             $contaRemetente = $contaRepository->findOneBy(['numero' => $contaEnvio]);
             $contaRecebimento = $contaRepository->findOneBy(['numero' => $contaDestino]);
+            if($contaRemetente === $contaRecebimento){
+                $this->addFlash('error', 'Não se pode realizar transferencia para contas iguais!');
+                return $this->redirectToRoute('app_home_page');
+            }
          
             $transferencia->setDescricao('Transferencia');
             $transferencia->setData(new \DateTime());
             if($contaRemetente->getSaldo() < $valor){
                 $this->addFlash('error', 'Saldo Insuficiente!');
+                return $this->redirectToRoute('app_home_page');
+            }
+            if($valor <= 0){
+                $this->addFlash('error', 'Digite um valor valido para transferencia!');
                 return $this->redirectToRoute('app_home_page');
 
             }else{
