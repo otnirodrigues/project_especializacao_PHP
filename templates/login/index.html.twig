@@ -16,11 +16,12 @@
             type="password"
             name="_password"
     </div>
-        <input type="hidden" name="_target_path" value="/agencia" />
+        <input type="hidden" name="_target_path" value="/" />
     <div>
-        <button type="submit" class=" bg-indigo-600 hover:bg-indigo-700 dark:bg-indigo-500 dark:hover:bg-indigo-400 text-white rounded-md border p-2 mt-4 mb-2">
-            Login
-        </button>
+        <a href="{{ path('app_home_page') }}">
+            <button type="submit" class=" bg-indigo-600 hover:bg-indigo-700 dark:bg-indigo-500 dark:hover:bg-indigo-400 text-white rounded-md border p-2 mt-4 mb-2">Login</button>
+        </a>
+        
     
         <a href="{{ path('app_home_page') }}" class=" bg-indigo-600 hover:bg-indigo-700 dark:bg-indigo-500 dark:hover:bg-indigo-400 text-white rounded-md border p-2 mt-4 mb-2">
             Cancelar

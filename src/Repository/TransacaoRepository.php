@@ -39,20 +39,20 @@ class TransacaoRepository extends ServiceEntityRepository
         }
     }
 
-//    /**
-//     * @return Transacao[] Returns an array of Transacao objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('t')
-//            ->andWhere('t.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('t.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+   /**
+    * @return Transacao[] Returns an array of Transacao objects
+    */
+   public function findByListarContas($id): array
+   {
+       return $this->createQueryBuilder('t')
+           ->andWhere('t.contaDestino = :val')
+           ->orWhere('t.contaRemetente = :val')
+           ->setParameter('val', $id)
+           ->orderBy('t.id', 'ASC')
+           ->getQuery()
+           ->getResult()
+       ;
+   }
 
 //    public function findOneBySomeField($value): ?Transacao
 //    {

@@ -67,11 +67,7 @@ class RegistrationController extends AbstractController
             $conta->setSaldo(0);
             $conta->setNumero(rand(111, 999));
             $conta->setAgencia($agencia->getAgencia());
-            $conta->setTipoConta($agencia->getTipoConta());
-
-          
-
-            
+            $conta->setTipoConta($agencia->getTipoConta());  
             $conta->setIsActive(false);
         
             $entityManager->persist($conta);

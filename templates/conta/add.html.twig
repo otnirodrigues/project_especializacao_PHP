@@ -3,10 +3,14 @@
 {% block title %}SB ✅{% endblock %}
 
 {% block body %}
+    <h1>Criando uma nova Conta</h1>
+    {{ form_start(form) }}
+        {{ form_row(form.tipoConta) }}
+        {{ form_row(form.agencia) }}
+        <button type="submit" class="bg-indigo-600 hover:bg-indigo-700 dark:bg-indigo-500 dark:hover:bg-indigo-400 text-white rounded-md border p-2 mt-4 mb-2">
+            Criar Conta
+        </button>
+    {{ form_end(form) }}
 
-    <label class="block text-sm text-gray-700 dark:text-gray-300 font-medium">
-        {{ form_start(formConta) }}
-        
-        {{ form_end(formConta) }}
-    </label>  
+    <a href="{{ path('app_cliente_listar', {id:app.user.id}) }}" class=" bg-indigo-600 hover:bg-indigo-700 dark:bg-indigo-500 dark:hover:bg-indigo-400 text-white rounded-md border p-2 mt-4 mb-2">Cancelar</a>
 {% endblock %}

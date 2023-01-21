@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}SB ✅{% endblock %}
+
+{% block body %}
+
+<div class="example-wrapper">
+    <div class=" bg-indigo-600 hover:bg-indigo-700 dark:bg-indigo-500 dark:hover:bg-indigo-400 text-white rounded-md border p-2 mt-4 mb-2">
+                <h4> Número da conta: {{ conta.numero }}</h4>
+                <h4> Saldo da conta: {{ conta.saldo }}</h4>
+                <h4> Tipo da conta: {{ conta.tipoConta }}</h4>
+    </div>
+    
+    
+    <div>
+        <a href="{{ path('app_cliente_saque', {id:app.user.id, conta:conta.id}) }}">
+            <button class=" bg-indigo-600 hover:bg-indigo-700 dark:bg-indigo-500 dark:hover:bg-indigo-400 text-white rounded-md border p-2 mt-4 mb-2">Sacar</button>
+        </a>
+        <a href="{{ path('app_cliente_deposito', {id:app.user.id, conta:conta.id}) }}">
+            <button class=" bg-indigo-600 hover:bg-indigo-700 dark:bg-indigo-500 dark:hover:bg-indigo-400 text-white rounded-md border p-2 mt-4 mb-2">Depositar</button>
+        </a>
+        <a href="{{ path('app_cliente_transferencia', {id:app.user.id, conta:conta.id}) }}">
+            <button class=" bg-indigo-600 hover:bg-indigo-700 dark:bg-indigo-500 dark:hover:bg-indigo-400 text-white rounded-md border p-2 mt-4 mb-2">Transferir</button>
+        </a>
+        </a>
+        <a href="{{ path('app_cliente_listar', {id:app.user.id}) }}">
+            <button class=" bg-indigo-600 hover:bg-indigo-700 dark:bg-indigo-500 dark:hover:bg-indigo-400 text-white rounded-md border p-2 mt-4 mb-2">Voltar</button>
+        </a>
+    </div>
+
+    {% if listaTransacoes |length > 0 %}
+       <ul> {% for transacao in listaTransacoes %}
+        <li>
+            <h4> ______________________________________________</h4>
+            <h4> Transação Tipo:  {{ transacao.descricao }}</h4>
+            <h4> Realizada: {{ transacao.data|date("d/m/Y")}}</h4>
+            <h4> Valor: {{ transacao.valor }}</h4>
+            <h4> Número da conta de Envio: {{ transacao.contaRemetente}}</h4>
+            <h4> Número da conta destino: {{ transacao.contaDestino}}</h4>
+            
+        </li>
+
+            {% endfor %}
+        </ul> 
+    {% else %}
+            Não tem nada para mostrar
+    {% endif %}
+
+</div>
+
+{% endblock %}
