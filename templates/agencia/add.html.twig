@@ -6,10 +6,20 @@
   
     {{ form_start(form) }}
         <h3>Preencha as informações para adicionar uma nova Agência</h3>
+
+        {{ form_row(form.nome) }}
+        {{ form_row(form.rua) }}
+        {{ form_row(form.bairro) }}
+        {{ form_row(form.numero) }}
+        {{ form_row(form.cidade) }}
+        {{ form_row(form.uf) }}
+        {{ form_row(form.cep) }}
+        {{ form_row(form.gerente) }}
+
+        <button type = "submit" class="bg-indigo-600 hover:bg-indigo-700 dark:bg-indigo-500 dark:hover:bg-indigo-400 text-white rounded-md border p-2 mt-4 mb-2">Salvar</button>
+    
     {{ form_end(form) }}
     <div>
-        <button class="bg-indigo-600 hover:bg-indigo-700 dark:bg-indigo-500 dark:hover:bg-indigo-400 text-white rounded-md border p-2 mt-4 mb-2">Salvar</button>
-    
         <a href="{{ path('app_agencia') }}" class=" bg-indigo-600 hover:bg-indigo-700 dark:bg-indigo-500 dark:hover:bg-indigo-400 text-white rounded-md border p-2 mt-4 mb-2">
             Cancelar
         </a>

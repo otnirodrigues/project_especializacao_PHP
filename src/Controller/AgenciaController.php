@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Agencia;
 use App\Form\AgenciaType;
 use App\Repository\AgenciaRepository;
+use App\Repository\BancoRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -29,10 +30,12 @@ class AgenciaController extends AbstractController
     }
 
     #[Route('/agencia/add', name: 'app_agencia_add', priority: 2)]
-    public function add(Request $request, AgenciaRepository $agencia) : Response {
-      
-        $form = $this->createForm(AgenciaType::class, new Agencia());
+    public function add(Request $request, AgenciaRepository $agencia, BancoRepository $banco) : Response {
+        
+        $agenciaNew = new Agencia();
+        $form = $this->createForm(AgenciaType::class, $agenciaNew);
 
+        
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()){
             $agencias = $form->getData();

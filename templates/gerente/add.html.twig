@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}SB ✅{% endblock %}
+
+{% block body %}
+
+    <label class="block text-sm text-gray-700 dark:text-gray-300 font-medium">
+        {{ form_start(form) }}
+            {{ form_row(form.nome) }}
+            {{ form_row(form.user) }}
+            <button type="submit" class="bg-indigo-600 hover:bg-indigo-700 dark:bg-indigo-500 dark:hover:bg-indigo-400 text-white rounded-md border p-2 mt-4 mb-2">Cadastar</button>
+        
+        {{ form_end(form) }}
+        <div>
+            <a href="{{ path('app_home_page') }}">
+                <button class=" bg-indigo-600 hover:bg-indigo-700 dark:bg-indigo-500 dark:hover:bg-indigo-400 text-white rounded-md border p-2 mt-4 mb-2">Cancelar</button>
+            </a>
+        </div>
+    
+    </label>  
+{% endblock %}

@@ -19,6 +19,14 @@ class Gerente
     #[ORM\OneToOne(cascade: ['persist', 'remove'])]
     private ?User $user = null;
 
+    #[ORM\OneToOne(mappedBy: 'gerente', cascade: ['persist', 'remove'])]
+    private ?Agencia $agencia = null;
+
+    public function __toString()
+    {
+        return $this->nome;
+    }
+
     public function getId(): ?int
     {
         return $this->id;
@@ -44,6 +52,28 @@ class Gerente
     public function setUser(?User $user): self
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    public function getAgencia(): ?Agencia
+    {
+        return $this->agencia;
+    }
+
+    public function setAgencia(?Agencia $agencia): self
+    {
+        // unset the owning side of the relation if necessary
+        if ($agencia === null && $this->agencia !== null) {
+            $this->agencia->setGerente(null);
+        }
+
+        // set the owning side of the relation if necessary
+        if ($agencia !== null && $agencia->getGerente() !== $this) {
+            $agencia->setGerente($this);
+        }
+
+        $this->agencia = $agencia;
 
         return $this;
     }
