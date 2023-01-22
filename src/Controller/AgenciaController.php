@@ -45,7 +45,7 @@ class AgenciaController extends AbstractController
        }
 
     return $this->renderForm(
-        'agencia/add.html.twig',
+        'gencia/add.html.twig',
         [ 'form' => $form ]
     );
        

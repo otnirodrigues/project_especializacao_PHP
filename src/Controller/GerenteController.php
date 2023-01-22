@@ -20,22 +20,5 @@ class GerenteController extends AbstractController
         ]);
     }
 
-    #[Route('/gerente/add', name: 'app_gerente_add', priority: 2)]
-    public function add(Request $request, GerenteRepository $gerente) : Response {
-      
-        $form = $this->createForm(GerenteType::class, new Gerente());
-
-        $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()){
-            $gerentes = $form->getData();
-            $gerente->save($gerentes, true);
-            $this->addFlash('success', 'Gerente Criado');
-            return $this->redirectToRoute('app_gerente');
-       }
-
-    return $this->renderForm(
-        'gerente/add.html.twig',
-        [ 'form' => $form ]
-    );
-    }
+    
 }

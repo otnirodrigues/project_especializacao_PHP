@@ -26,7 +26,7 @@ class ClienteController extends AbstractController
 
 
     //Listar Contas Clientes
-    #[Route('/{id}', name: 'app_cliente_listar', methods: ['GET'])]
+    #[Route('/cliente/{id}', name: 'app_cliente_listar', methods: ['GET'])]
     public function listarContasClientes(User $user, ContaRepository $contaRepository): Response
     {
         $minhasContas = $contaRepository->findBy(['user' => $user->getId() ]);
@@ -37,7 +37,7 @@ class ClienteController extends AbstractController
     }
 
     //Acessar uma conta
-    #[Route('/{id}/conta/{conta}', name: 'app_cliente_verConta', methods: ['GET'])]
+    #[Route('/cliente/{id}/conta/{conta}', name: 'app_cliente_verConta', methods: ['GET'])]
     public function verConta(User $user,TransacaoRepository $transacaoRepository, ContaRepository $contaRepository, $conta): Response
     {
         $conta = $contaRepository->findOneBy(['user' => $user->getId(), 'id' => $conta]);
@@ -50,7 +50,7 @@ class ClienteController extends AbstractController
     }
 
     // Criar nova conta Usuário logado
-    #[Route('/{id}/conta/add', name: 'app_cliente_nova_conta', methods: ['GET', 'POST'])]
+    #[Route('/cliente/{id}/conta/add', name: 'app_cliente_nova_conta', methods: ['GET', 'POST'])]
     public function criandoConta(Request $request, User $user, ContaRepository $contaRepository): Response
     {
         $conta = new Conta();
@@ -75,7 +75,7 @@ class ClienteController extends AbstractController
 
     // Saque com o usuário logado
 
-    #[Route('/{id}/{conta}/sacar', name: 'app_cliente_saque', methods: ['GET', 'POST'])]
+    #[Route('/cliente/{id}/{conta}/sacar', name: 'app_cliente_saque', methods: ['GET', 'POST'])]
     public function sacarCliente(Request $request,$conta, TransacaoRepository $transacaoRepository,ContaRepository $contaRepository, 
     EntityManagerInterface $entityManager, User $user): Response
     {
@@ -111,7 +111,7 @@ class ClienteController extends AbstractController
     }
 
     // Deposito com o usuário logado
-    #[Route('/{id}/{conta}/deposito', name: 'app_cliente_deposito', methods: ['GET', 'POST'])]
+    #[Route('/cliente/{id}/{conta}/deposito', name: 'app_cliente_deposito', methods: ['GET', 'POST'])]
     public function depositarCliente(Request $request,$conta, TransacaoRepository $transacaoRepository,ContaRepository $contaRepository, 
     EntityManagerInterface $entityManager, User $user): Response
     {
@@ -144,7 +144,7 @@ class ClienteController extends AbstractController
         ]);
     }
     
-    #[Route('/{id}/{conta}/transferencia', name: 'app_cliente_transferencia', methods: ['GET', 'POST'])]
+    #[Route('/cliente/{id}/{conta}/transferencia', name: 'app_cliente_transferencia', methods: ['GET', 'POST'])]
     public function tranferenciaCliente(Request $request,$conta, TransacaoRepository $transacaoRepository,ContaRepository $contaRepository, 
     EntityManagerInterface $entityManager, User $user): Response
     {

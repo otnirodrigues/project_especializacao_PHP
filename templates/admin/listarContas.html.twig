@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}SB ✅{% endblock %}
+
+{% block body %}
+
+
+<div class="example-wrapper">
+    <h1>Lista de Contas Bancárias</h1>
+    <div>
+        
+
+        {% if contas|length > 0 %}
+            {% for conta in contas %}
+                <div class=" bg-indigo-600 hover:bg-indigo-700 dark:bg-indigo-500 dark:hover:bg-indigo-400 text-white rounded-md border p-2 mt-4 mb-2">
+                    
+                    <h4> Numero da Conta: {{ conta.numero}}</h4>
+                    <h4> Usuário da Conta:{{ conta.user}}</h4>
+                    <h4> Saldo da Conta:{{ conta.saldo}}</h4>
+                    <h4> Agencia da Conta:{{ conta.agencia}}</h4>
+                    
+                </div>
+            {% endfor %}
+        {% else %}
+            Nenhuma conta cadastrada
+        {% endif %}
+    </div>
+
+    <a href="{{ path('app_admin') }}">
+            <button class=" bg-indigo-600 hover:bg-indigo-700 dark:bg-indigo-500 dark:hover:bg-indigo-400 text-white rounded-md border p-2 mt-4 mb-2">Voltar</button>
+    </a>
+
+</div>
+
+{% endblock %}

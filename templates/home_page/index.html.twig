@@ -4,6 +4,31 @@
 
 {% block body %}
 
+<header class="text-end p-3">
+
+    
+
+    {% if is_granted('ROLE_ADMIN') %}
+    <a class="bg-indigo-600 hover:bg-indigo-700 dark:bg-indigo-500 dark:hover:bg-indigo-400 text-white rounded-md border p-2 mt-4 mb-2" href="{{path('app_admin')}}">Painel do Admin</a>
+
+    {% endif %}
+
+    {% if is_granted('ROLE_GERENTE') and not is_granted('ROLE_ADMIN') %}
+    <a class="bg-indigo-600 hover:bg-indigo-700 dark:bg-indigo-500 dark:hover:bg-indigo-400 text-white rounded-md border p-2 mt-4 mb-2" href="{{path('app_gerente', {gerente:app.user.id})}}">Painel do Gerente</a>
+    
+    {% endif %}
+
+    {% if is_granted('ROLE_CLIENT') and not is_granted('ROLE_ADMIN') %}
+    <a class="bg-indigo-600 hover:bg-indigo-700 dark:bg-indigo-500 dark:hover:bg-indigo-400 text-white rounded-md border p-2 mt-4 mb-2" href="{{path('app_cliente', {id: app.user.id})}}">Area do cliente</a>
+    {% endif %}
+ 
+
+    
+
+
+
+</header>
+
 {% if app.user %}
 
     <div>
