@@ -24,7 +24,7 @@ class GerenteController extends AbstractController
 {
     
     //Buscar Agencia Do gerente
-    #[Route('/agencia', name: 'app_gerente_agencia_listar', methods: ['GET'], priority: 2)]
+    #[Route('/agencia', name: 'app_gerente_agencia_listar', methods: ['GET'])]
     public function listarAgenciasGerente(AgenciaRepository $agenciaRepository, GerenteRepository $gerenteRepository, UserRepository $userRepository): Response
     {
         $user = $this->getUser();

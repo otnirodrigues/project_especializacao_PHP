@@ -9,21 +9,23 @@
     <div>
         
 
-        {% if agencias|length > 0 %}
-            {% for agencia in agencias %}
+        {% if gerentes|length > 0 %}
+            {% for gerente in gerentes %}
                 <div class=" bg-indigo-600 hover:bg-indigo-700 dark:bg-indigo-500 dark:hover:bg-indigo-400 text-white rounded-md border p-2 mt-4 mb-2">
-                    {{ agencia.nome}}
-                    <h4>Endereço: {{agencia.rua}} - {{agencia.bairro}} n° {{agencia.numero}}. {{agencia.cidade}} - {{agencia.uf}}</h4>
-                    <h4>Gerente: {{agencia.gerente}}</h4>
+                    
+                    <h4> Nome do Gerente: {{ gerente.nome}}</h4>
+                    <h4> Agencia do Gerente: {{ gerente.agencia}}</h4>
+                    
                     
                 </div>
             {% endfor %}
         {% else %}
-             Nenhuma Agencia Cadastrada
+            Nenhuma conta cadastrada
         {% endif %}
-    </div>  
-    <a href="{{ path('app_admin_agencia_add') }}">
-            <button class=" bg-indigo-600 hover:bg-indigo-700 dark:bg-indigo-500 dark:hover:bg-indigo-400 text-white rounded-md border p-2 mt-4 mb-2">Criar Agencia</button>
+    </div>
+
+    <a href="{{ path('app__admin_gerente_add') }}">
+            <button class=" bg-indigo-600 hover:bg-indigo-700 dark:bg-indigo-500 dark:hover:bg-indigo-400 text-white rounded-md border p-2 mt-4 mb-2">Criar Gerente</button>
     </a>
     <a href="{{ path('app_admin') }}">
             <button class=" bg-indigo-600 hover:bg-indigo-700 dark:bg-indigo-500 dark:hover:bg-indigo-400 text-white rounded-md border p-2 mt-4 mb-2">Voltar</button>

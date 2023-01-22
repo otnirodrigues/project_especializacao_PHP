@@ -6,11 +6,18 @@
 
 <div class="example-wrapper">
     <div class=" bg-indigo-600 hover:bg-indigo-700 dark:bg-indigo-500 dark:hover:bg-indigo-400 text-white rounded-md border p-2 mt-4 mb-2">
-
-        <h1>{{minhaAgencia.nome}} </h1>
-        <h4>Endereço: Rua {{minhaAgencia.rua}} - {{minhaAgencia.bairro}} n° {{minhaAgencia.numero}}. {{minhaAgencia.cidade}} - {{minhaAgencia.uf}}</h4>
-        <h4>Gerente: {{minhaAgencia.gerente}}</h4>
-
+        
+        {% if minhaAgencia|length > 0 %}
+            {% for agencia in minhaAgencia %}
+                    <h4>Nome: {{ agencia.nome}}</h4>
+                    <h4>Endereço: {{agencia.rua}} - {{agencia.bairro}} n° {{agencia.numero}}. {{agencia.cidade}} - {{agencia.uf}}</h4>
+                    <h4>Gerente: {{agencia.gerente}}</h4>
+                    
+              
+            {% endfor %}
+        {% else %}
+             Nenhuma Agencia Cadastrada
+        {% endif %}
     </div>
 
     <div>

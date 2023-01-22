@@ -51,7 +51,7 @@ class AdminController extends AbstractController
     #[Route('/admin/gerente', name: 'app_gerente_admin')]
     public function listarGerente(GerenteRepository $gerente): Response
     {
-        return $this->render('gerente/index.html.twig', [
+        return $this->render('admin/listarGerentes.html.twig', [
             'controller_name' => 'GerenteController',
             'gerentes' => $gerente->findAll()
         ]);

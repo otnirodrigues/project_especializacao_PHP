@@ -48,7 +48,7 @@ class ClienteController extends AbstractController
     }
 
     // Criar nova conta Usuário logado
-    #[Route('/cliente/{id}/conta/add', name: 'app_cliente_nova_conta', methods: ['GET', 'POST'])]
+    #[Route('/cliente/{id}/conta/add', name: 'app_cliente_nova_conta', methods: ['GET', 'POST'],  priority: 2)]
     public function criandoConta(Request $request, User $user, ContaRepository $contaRepository): Response
     {
         $conta = new Conta();
@@ -64,7 +64,7 @@ class ClienteController extends AbstractController
             return $this->redirectToRoute('app_cliente_listar', ['id'=> $user->getId()], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('conta/add.html.twig', [
+        return $this->render('conta/add.html.twig', [
             'conta' => $conta,
             'form' => $form,
         ]);
