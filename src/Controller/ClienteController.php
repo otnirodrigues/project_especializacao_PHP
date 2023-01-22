@@ -38,15 +38,6 @@ class ClienteController extends AbstractController
         ]);
     }
 
-    #[Route('/gerente/agencia/contas', name: 'app_contas_agencia_listar', methods: ['GET'])]
-    public function listarContasAgencias(User $user, Agencia $agencia, AgenciaRepository $agenciaRepository, ContaRepository $contaRepository): Response
-    {
-        $minhasContas = $agenciaRepository->findBy(['contas' => $agencia->getId() ]);
-            return $this->render('cliente/index.html.twig', [
-            'agencia' => $agencia,
-            'contas'=> $minhasContas,
-        ]);
-    }
     //Acessar uma conta
     #[Route('/cliente/{id}/conta/{conta}', name: 'app_cliente_verConta', methods: ['GET'])]
     public function verConta(User $user,TransacaoRepository $transacaoRepository, ContaRepository $contaRepository, $conta): Response
