@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Entity\Conta;
+use App\Entity\Agencia;
 use App\Form\ContaType;
 use App\Entity\Transacao;
 use App\Form\TransacaoType;
@@ -11,6 +12,7 @@ use App\Form\TransacaoSaqueType;
 use App\Repository\UserRepository;
 use App\Repository\ContaRepository;
 use App\Form\TransacaoDepositarType;
+use App\Repository\AgenciaRepository;
 use App\Repository\TransacaoRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -36,6 +38,15 @@ class ClienteController extends AbstractController
         ]);
     }
 
+    #[Route('/gerente/agencia/contas', name: 'app_contas_agencia_listar', methods: ['GET'])]
+    public function listarContasAgencias(User $user, Agencia $agencia, AgenciaRepository $agenciaRepository, ContaRepository $contaRepository): Response
+    {
+        $minhasContas = $agenciaRepository->findBy(['contas' => $agencia->getId() ]);
+            return $this->render('cliente/index.html.twig', [
+            'agencia' => $agencia,
+            'contas'=> $minhasContas,
+        ]);
+    }
     //Acessar uma conta
     #[Route('/cliente/{id}/conta/{conta}', name: 'app_cliente_verConta', methods: ['GET'])]
     public function verConta(User $user,TransacaoRepository $transacaoRepository, ContaRepository $contaRepository, $conta): Response
@@ -190,5 +201,29 @@ class ClienteController extends AbstractController
             'transacao' => $transacao,
             'form' => $form,
         ]);
+    }
+
+    #[Route('/cliente/{id}/conta/{conta}/encerrar', name: 'app_conta_encerrar')]
+    public function encerrar($conta, User $user, TransacaoRepository $transacaoRepository, ContaRepository $contaRepository, EntityManagerInterface $entityManager):Response
+    {
+
+        $minhaConta = $contaRepository->findOneBy(['user' => $user->getId(), 'id' => $conta]);
+           
+            
+            $saldo = $minhaConta->getSaldo();
+            if ($saldo > 0) {
+                $this->addFlash('error', 'A conta só pode ser encerrada se não existir saldo!');
+                return $this->redirectToRoute('app_cliente_verConta', ['id' => $user->getId(),'conta'=> $minhaConta->getId()]);
+            }
+            $transaocoes = $transacaoRepository->findBy(['contaRemetente' => $minhaConta->getId()]);
+            foreach ($transaocoes as $transacao) {
+                $transacao->setContaRemetente(null);
+                $entityManager->persist($transacao);
+            }
+            $contaRepository->remove($minhaConta);   
+            $entityManager->flush();
+            $this->addFlash('success', 'Conta encerrada com sucesso!');
+            return $this->redirectToRoute('app_cliente_listar', ['id' => $user->getId()]);
+    
     }
 }

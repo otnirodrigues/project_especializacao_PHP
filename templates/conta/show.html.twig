@@ -22,6 +22,8 @@
         <a href="{{ path('app_cliente_transferencia', {id:app.user.id, conta:conta.id}) }}">
             <button class=" bg-indigo-600 hover:bg-indigo-700 dark:bg-indigo-500 dark:hover:bg-indigo-400 text-white rounded-md border p-2 mt-4 mb-2">Transferir</button>
         </a>
+        <a href="{{ path('app_conta_encerrar', {id:app.user.id, conta:conta.id}) }}">
+            <button class=" bg-indigo-600 hover:bg-indigo-700 dark:bg-indigo-500 dark:hover:bg-indigo-400 text-white rounded-md border p-2 mt-4 mb-2">Encerrar Conta</button>
         </a>
         <a href="{{ path('app_cliente_listar', {id:app.user.id}) }}">
             <button class=" bg-indigo-600 hover:bg-indigo-700 dark:bg-indigo-500 dark:hover:bg-indigo-400 text-white rounded-md border p-2 mt-4 mb-2">Voltar</button>
