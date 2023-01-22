@@ -27,6 +27,7 @@ class AdminController extends AbstractController
         ]);
     }
 
+    # Listar Agencias Painel Admim 
     #[Route('/admin/agencia', name: 'app_agencia_admin', priority: 2)]
     public function listarAgencias(AgenciaRepository $agencias): Response{
     
@@ -36,6 +37,7 @@ class AdminController extends AbstractController
         ]);
     }
 
+    # Listar Contas Painel Admim
     #[Route('admin/conta', name: 'app_conta_admin')]
     public function listarContas(ContaRepository $contas): Response
     {
@@ -45,6 +47,7 @@ class AdminController extends AbstractController
         ]);
     }
 
+    # Listar Gerentes Painel Admim
     #[Route('/admin/gerente', name: 'app_gerente_admin')]
     public function listarGerente(GerenteRepository $gerente): Response
     {
@@ -54,6 +57,7 @@ class AdminController extends AbstractController
         ]);
     }
 
+    # Criar Gerentes Painel Admim
     #[Route('admin/gerente/add', name: 'app__admin_gerente_add')]
     public function addGerente(Request $request, GerenteRepository $gerente) : Response {
       
@@ -73,7 +77,7 @@ class AdminController extends AbstractController
     );
     }
 
-
+    # Criar Agencias Painel Admim
     #[Route('/admin/agencia/add', name: 'app_admin_agencia_add')]
     public function addAgencias(Request $request, AgenciaRepository $agencia) : Response {
         
