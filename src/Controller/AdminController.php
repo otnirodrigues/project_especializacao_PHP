@@ -57,25 +57,25 @@ class AdminController extends AbstractController
         ]);
     }
 
-    # Criar Gerentes Painel Admim
-    #[Route('admin/gerente/add', name: 'app__admin_gerente_add')]
-    public function addGerente(Request $request, GerenteRepository $gerente) : Response {
+    // # Criar Gerentes Painel Admim
+    // #[Route('admin/gerente/add', name: 'app__admin_gerente_add')]
+    // public function addGerente(Request $request, GerenteRepository $gerente) : Response {
       
-        $form = $this->createForm(GerenteType::class, new Gerente());
+    //     $form = $this->createForm(GerenteType::class, new Gerente());
 
-        $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()){
-            $gerentes = $form->getData();
-            $gerente->save($gerentes, true);
-            $this->addFlash('success', 'Gerente Criado');
-            return $this->redirectToRoute('app_gerente_admin');
-       }
+    //     $form->handleRequest($request);
+    //     if ($form->isSubmitted() && $form->isValid()){
+    //         $gerentes = $form->getData();
+    //         $gerente->save($gerentes, true);
+    //         $this->addFlash('success', 'Gerente Criado');
+    //         return $this->redirectToRoute('app_gerente_admin');
+    //    }
 
-    return $this->renderForm(
-        'admin/addGerente.html.twig',
-        [ 'form' => $form ]
-    );
-    }
+    // return $this->renderForm(
+    //     'admin/addGerente.html.twig',
+    //     [ 'form' => $form ]
+    // );
+    // }
 
     # Criar Agencias Painel Admim
     #[Route('/admin/agencia/add', name: 'app_admin_agencia_add')]

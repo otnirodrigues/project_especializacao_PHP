@@ -5,28 +5,23 @@
 {% block body %}
 
 <div class="example-wrapper">
-    <div>
+    <div class=" bg-indigo-600 hover:bg-indigo-700 dark:bg-indigo-500 dark:hover:bg-indigo-400 text-white rounded-md border p-2 mt-4 mb-2">
 
-        {% if gerentes|length > 0 %}
-            {% for gerente in gerentes %}
-                <h4>___________________</h4>
-                <h4>Nome: {{gerente.nome}} </h4>
-                <h4>Agencia: {{gerente.agencia}}</h4>
-        
-            {% endfor %}
-        {% else %}
-            Nenhuma conta cadastrada
-        {% endif %}
+        <h1>{{minhaAgencia.nome}} </h1>
+        <h4>Endereço: Rua {{minhaAgencia.rua}} - {{minhaAgencia.bairro}} n° {{minhaAgencia.numero}}. {{minhaAgencia.cidade}} - {{minhaAgencia.uf}}</h4>
+        <h4>Gerente: {{minhaAgencia.gerente}}</h4>
 
-        <h4>___________________</h4>
     </div>
-    <a href="{{ path('app__admin_gerente_add') }}" class=" bg-indigo-600 hover:bg-indigo-700 dark:bg-indigo-500 dark:hover:bg-indigo-400 text-white rounded-md border p-2 mt-4 mb-2">
-            Adicionar Gerente
-    </a>
-    
-    <a href="{{ path('app_admin') }}" class=" bg-indigo-600 hover:bg-indigo-700 dark:bg-indigo-500 dark:hover:bg-indigo-400 text-white rounded-md border p-2 mt-4 mb-2">
+
+    <div>
+        <a href="{{ path('app_gerente_agencia_conta_listar') }}" class=" bg-indigo-600 hover:bg-indigo-700 dark:bg-indigo-500 dark:hover:bg-indigo-400 text-white rounded-md border p-2 mt-4 mb-2">
+            Acessar Contas Agencia
+        </a>
+        <a href="{{ path('app_home_page') }}" class=" bg-indigo-600 hover:bg-indigo-700 dark:bg-indigo-500 dark:hover:bg-indigo-400 text-white rounded-md border p-2 mt-4 mb-2">
             Voltar
-    </a>
+        </a>
+    </div>
+
     
 </div>
 {% endblock %}

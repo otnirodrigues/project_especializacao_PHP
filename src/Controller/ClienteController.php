@@ -4,15 +4,11 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Entity\Conta;
-use App\Entity\Agencia;
 use App\Form\ContaType;
 use App\Entity\Transacao;
 use App\Form\TransacaoType;
 use App\Form\TransacaoSaqueType;
-use App\Repository\UserRepository;
 use App\Repository\ContaRepository;
-use App\Form\TransacaoDepositarType;
-use App\Repository\AgenciaRepository;
 use App\Repository\TransacaoRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;

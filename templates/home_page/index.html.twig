@@ -14,7 +14,7 @@
     {% endif %}
 
     {% if is_granted('ROLE_GERENTE') and not is_granted('ROLE_ADMIN') %}
-    <a class="bg-indigo-600 hover:bg-indigo-700 dark:bg-indigo-500 dark:hover:bg-indigo-400 text-white rounded-md border p-2 mt-4 mb-2" href="{{path('app_gerente', {gerente:app.user.id})}}">Painel do Gerente</a>
+    <a class="bg-indigo-600 hover:bg-indigo-700 dark:bg-indigo-500 dark:hover:bg-indigo-400 text-white rounded-md border p-2 mt-4 mb-2" href="{{path('app_gerente_agencia_listar')}}">Painel do Gerente</a>
     
     {% endif %}
 
